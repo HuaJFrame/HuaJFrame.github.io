@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://huajframe.github.io/img/category/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95.jpg">
 <meta property="article:published_time" content="2020-12-23T16:11:34.000Z">
-<meta property="article:modified_time" content="2022-10-29T12:36:11.262Z">
+<meta property="article:modified_time" content="2022-10-30T12:55:34.680Z">
 <meta property="article:author" content="HuaJFrame">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://huajframe.github.io/img/category/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95.jpg">
@@ -250,7 +250,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.5k 字
+          6.6k 字
         
       </span>
     
@@ -261,7 +261,7 @@
         
         
         
-          38 分钟
+          55 分钟
         
       </span>
     
@@ -439,7 +439,41 @@
 <li>时间复杂度 ：最佳：<code>O(nlogn)</code>， 最差：<code>O(n2)</code> 平均：<code>O(nlogn)</code></li>
 <li>空间复杂度 ：<code>O(1)</code></li>
 </ul>
-<h3 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h3><h4 id="归并，快速，堆，计数，桶，基数"><a href="#归并，快速，堆，计数，桶，基数" class="headerlink" title="归并，快速，堆，计数，桶，基数"></a>归并，快速，堆，计数，桶，基数</h4>
+<h3 id="2-5-归并排序-Merge-Sort"><a href="#2-5-归并排序-Merge-Sort" class="headerlink" title="2.5 归并排序(Merge Sort)"></a>2.5 归并排序(Merge Sort)</h3><p>归并排序是建立在归并操作上的一种有效的排序算法。该算法是采用<strong>分治法</strong> (Divide and Conquer) 的一个非常典型的应用。归并排序是一种<strong>稳定</strong>的排序方法。将已有序的子序列合并，得到完全有序的序列；即先使每个子序列有序，再使子序列段间有序。若将两个有序表合并成一个有序表，称为 <code>2 - 路</code>归并。</p>
+<p>和选择排序一样，归并排序的性能不受输入数据的影响，但表现比选择排序好的多，因为始终都是 <code>O(nlogn)</code> 的时间复杂度。代价是需要额外的内存空间。</p>
+<h4 id="2-5-1-算法步骤"><a href="#2-5-1-算法步骤" class="headerlink" title="2.5.1 算法步骤"></a>2.5.1 算法步骤</h4><p>归并排序算法是一个递归过程，边界条件为当输入序列仅有一个元素时，直接返回，具体过程如下：</p>
+<ol>
+<li>如果输入内只有一个元素，则直接返回，否则将长度为 n 的输入序列分成两个长度为 n&#x2F;2 的子序列；</li>
+<li>分别对这两个子序列进行归并排序，使子序列变为有序状态；</li>
+<li>设定两个指针，分别指向两个已经排序子序列的起始位置；</li>
+<li>比较两个指针所指向的元素，选择相对小的元素放入到合并空间（用于存放排序结果），并移动指针到下一位置；</li>
+<li>重复步骤 3 ~4 直到某一指针达到序列尾；</li>
+<li>将另一序列剩下的所有元素直接复制到合并序列尾。</li>
+</ol>
+<h4 id="2-5-2-图解算法"><a href="#2-5-2-图解算法" class="headerlink" title="2.5.2 图解算法"></a>2.5.2 图解算法</h4><center>
+    <img src="/2020/12/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F/merge_sort.gif" srcset="/img/loading.gif" lazyload class="" title="归并排序">
+</center>
+
+<h4 id="2-5-3-代码实现"><a href="#2-5-3-代码实现" class="headerlink" title="2.5.3 代码实现"></a>2.5.3 代码实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 归并排序</span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> arr 需要排序的数组</span><br><span class="hljs-comment">*/</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] mergeSort(<span class="hljs-type">int</span>[] arr)&#123;<br>    <span class="hljs-keyword">if</span>(arr.length == <span class="hljs-number">1</span>)&#123;<br>        <span class="hljs-keyword">return</span> arr;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> arr.length / <span class="hljs-number">2</span>;<br>    <span class="hljs-comment">//对半拷贝数组</span><br>    <span class="hljs-type">int</span>[] arr1 = Arrays.copyOfRange(arr, <span class="hljs-number">0</span>, mid);<br>    <span class="hljs-type">int</span>[] arr2 = Arrays.copyOfRange(arr, mid, arr.length);<br>    <span class="hljs-comment">//递归</span><br>    <span class="hljs-keyword">return</span> merge(mergeSort(arr1), mergeSort(arr2));<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 合并两个数组</span><br><span class="hljs-comment">*</span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> arr1 数组1</span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> arr2 数组2</span><br><span class="hljs-comment">* <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">*/</span><br><span class="hljs-keyword">private</span> <span class="hljs-type">int</span>[] merge(<span class="hljs-type">int</span>[] arr1, <span class="hljs-type">int</span>[] arr2) &#123;<br>    <span class="hljs-comment">//结果数组</span><br>    <span class="hljs-type">int</span>[] resArr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[arr1.length + arr2.length];<br>    <span class="hljs-comment">//三个数组的指针</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">indexRes</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, indexA1 = <span class="hljs-number">0</span>, indexA2 = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span>(indexA1 &lt; arr1.length &amp;&amp; indexA2 &lt; arr2.length)&#123;<br>        <span class="hljs-keyword">if</span>(arr1[indexA1] &lt; arr2[indexA2])&#123;<br>            resArr[indexRes++] = arr1[indexA1++];<br><br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>            resArr[indexRes++] = arr2[indexA2++];<br>        &#125;<br>    &#125;<br>    <span class="hljs-comment">//arr1可能没遍历完</span><br>    <span class="hljs-keyword">while</span> (indexA1 &lt; arr1.length)&#123;<br>        resArr[indexRes++] = arr1[indexA1++];<br>    &#125;<br>    <span class="hljs-comment">//arr2可能没遍历完</span><br>    <span class="hljs-keyword">while</span> (indexA2 &lt; arr2.length)&#123;<br>        resArr[indexRes++] = arr2[indexA2++];<br>    &#125;<br>    <span class="hljs-keyword">return</span> resArr;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="2-5-4-归并排序算法总结"><a href="#2-5-4-归并排序算法总结" class="headerlink" title="2.5.4 归并排序算法总结"></a>2.5.4 归并排序算法总结</h4><ul>
+<li>稳定性：稳定</li>
+<li>时间复杂度 ：最佳：<code>O(nlogn)</code>， 最差：<code>O(nlogn)</code>， 平均：<code>O(nlogn)</code></li>
+<li>空间复杂度 ：<code>O(n)</code></li>
+</ul>
+<h3 id="2-6-快速排序-Quick-Sort"><a href="#2-6-快速排序-Quick-Sort" class="headerlink" title="2.6 快速排序(Quick Sort)"></a>2.6 快速排序(Quick Sort)</h3><p>快速排序用到了<strong><strong>分治思想</strong>，同样的还有归并排序。乍看起来快速排序和归并排序非常相似，都是将问题变小，先排序子串，最后合并。不同的是快速排序在划分子问题的时候经过多一步处理，将划分的两组数据划分为一大一小，这样在最后合并的时候就不必像归并排序那样再进行比较。但也正因为如此，划分的不定性使得快速排序的时间复杂度并**</strong>不稳定**。</p>
+<p>快速排序的基本思想：通过一趟排序将待排序列分隔成独立的两部分，其中一部分记录的元素均比另一部分的元素小，则可分别对这两部分子序列继续进行排序，以达到整个序列有序。</p>
+<h4 id="2-6-1-算法步骤"><a href="#2-6-1-算法步骤" class="headerlink" title="2.6.1 算法步骤"></a>2.6.1 算法步骤</h4><p>快速排序使用分治法（Divide and conquer）策略来把一个序列分为较小和较大的 2 个子序列，然后递回地排序两个子序列。具体算法描述如下：</p>
+<ol>
+<li>从序列中随机挑出一个元素，做为 “基准”(pivot)；</li>
+<li>重新排列序列，将所有比基准值小的元素摆放在基准前面，所有比基准值大的3. 摆在基准的后面（相同的数可以到任一边）。在这个操作结束之后，该基准就处于数列的中间位置。这个称为分区（partition）操作；</li>
+<li>递归地把小于基准值元素的子序列和大于基准值元素的子序列进行快速排序。</li>
+</ol>
+<h4 id="2-6-2-图解算法"><a href="#2-6-2-图解算法" class="headerlink" title="2.6.2 图解算法"></a>2.6.2 图解算法</h4><center>
+<img src="/2020/12/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F/random_quick_sort.gif" srcset="/img/loading.gif" lazyload class="" title="快速排序">
+</center>
+
+<h4 id="2-6-3-代码实现"><a href="#2-6-3-代码实现" class="headerlink" title="2.6.3 代码实现"></a>2.6.3 代码实现</h4><h4 id="2-6-4-快速排序算法总结"><a href="#2-6-4-快速排序算法总结" class="headerlink" title="2.6.4 快速排序算法总结"></a>2.6.4 快速排序算法总结</h4><h3 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h3>
                 
               </div>
             
