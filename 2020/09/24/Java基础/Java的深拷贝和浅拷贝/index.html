@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/spacex/img/avatar.ico">
-  <link rel="icon" href="/spacex/img/avatar.ico">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.ico">
+  <link rel="icon" href="/img/avatar.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -19,16 +19,16 @@
     <meta name="description" content="介绍深拷贝：深拷贝会完全复制整个对象，包括这个对象所包含的内部对象。​浅拷贝：浅拷贝会在堆上创建一个新的对象（区别于引用拷贝的一点），不过，如果原对象内部的属性是引用类型的话，浅拷贝会直接复制内部对象的引用地址，也就是说拷贝对象和原对象共用同一个内部对象。​ 举例浅拷贝我们实现Cloneable接口，重写clone()方法 1234567891011121314151617181920public">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java的深拷贝和浅拷贝">
-<meta property="og:url" content="https://huajframe.github.io/spacex/2020/09/24/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/index.html">
+<meta property="og:url" content="https://huajframe.github.io/2020/09/24/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/index.html">
 <meta property="og:site_name" content="HuaJFrame&#39;s Blog">
 <meta property="og:description" content="介绍深拷贝：深拷贝会完全复制整个对象，包括这个对象所包含的内部对象。​浅拷贝：浅拷贝会在堆上创建一个新的对象（区别于引用拷贝的一点），不过，如果原对象内部的属性是引用类型的话，浅拷贝会直接复制内部对象的引用地址，也就是说拷贝对象和原对象共用同一个内部对象。​ 举例浅拷贝我们实现Cloneable接口，重写clone()方法 1234567891011121314151617181920public">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://huajframe.github.io/spacex/img/category/Java.jpeg">
+<meta property="og:image" content="https://huajframe.github.io/img/category/Java.jpeg">
 <meta property="article:published_time" content="2020-09-24T07:43:56.000Z">
 <meta property="article:modified_time" content="2022-10-20T16:46:57.473Z">
 <meta property="article:author" content="HuaJFrame">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://huajframe.github.io/spacex/img/category/Java.jpeg">
+<meta name="twitter:image" content="https://huajframe.github.io/img/category/Java.jpeg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -58,12 +58,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-<link  rel="stylesheet" href="/spacex/css/main.css" />
+<link  rel="stylesheet" href="/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/spacex/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/spacex/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
@@ -72,15 +72,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"huajframe.github.io","root":"/spacex/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"ff7c6cfd7cc027545215f4628adae41a","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/spacex/local-search.xml"};
+    var CONFIG = {"hostname":"huajframe.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"ff7c6cfd7cc027545215f4628adae41a","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/spacex/js/utils.js" ></script>
-  <script  src="/spacex/js/color-schema.js" ></script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
   
 
   
@@ -125,7 +125,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/spacex/">
+    <a class="navbar-brand" href="/">
       <strong>HuaJFrame</strong>
     </a>
 
@@ -144,7 +144,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/spacex/">
+              <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
               </a>
@@ -156,7 +156,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/spacex/archives/">
+              <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
                 归档
               </a>
@@ -168,7 +168,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/spacex/categories/">
+              <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
                 分类
               </a>
@@ -180,7 +180,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/spacex/about/">
+              <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
                 关于
               </a>
@@ -192,7 +192,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/spacex/links/">
+              <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
               </a>
@@ -221,7 +221,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/spacex/img/default.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -323,7 +323,7 @@
 <p>测试</p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs abnf">Person person <span class="hljs-operator">=</span> new Person(new Address(<span class="hljs-string">&quot;长沙&quot;</span>))<span class="hljs-comment">;</span><br>Person person1 <span class="hljs-operator">=</span> person.clone()<span class="hljs-comment">;</span><br>System.out.println(person <span class="hljs-operator">=</span><span class="hljs-operator">=</span> person1)<span class="hljs-comment">;  //输出false</span><br>System.out.println(person.getAddress() <span class="hljs-operator">=</span><span class="hljs-operator">=</span> person1.getAddress())<span class="hljs-comment">; //输出false</span><br></code></pre></td></tr></table></figure>
 <p>person1的address也已经被clone<br>​</p>
-<h3 id="引用拷贝、浅拷贝、深拷贝三者区别"><a href="#引用拷贝、浅拷贝、深拷贝三者区别" class="headerlink" title="引用拷贝、浅拷贝、深拷贝三者区别"></a>引用拷贝、浅拷贝、深拷贝三者区别</h3><p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d57e5bf73f054ad096e7364b1740cf82~tplv-k3u1fbpfcp-watermark.image" srcset="/spacex/img/loading.gif" lazyload alt="shallow&amp;deep-copy.png"><br>​<br>惨考链接：<a target="_blank" rel="noopener" href="https://javaguide.cn/java/basis/java-basic-questions-02.html#%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%8C%BA%E5%88%AB%E4%BA%86%E8%A7%A3%E5%90%97-%E4%BB%80%E4%B9%88%E6%98%AF%E5%BC%95%E7%94%A8%E6%8B%B7%E8%B4%9D">Java Guide 深拷贝和浅拷贝区别</a></p>
+<h3 id="引用拷贝、浅拷贝、深拷贝三者区别"><a href="#引用拷贝、浅拷贝、深拷贝三者区别" class="headerlink" title="引用拷贝、浅拷贝、深拷贝三者区别"></a>引用拷贝、浅拷贝、深拷贝三者区别</h3><p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d57e5bf73f054ad096e7364b1740cf82~tplv-k3u1fbpfcp-watermark.image" srcset="/img/loading.gif" lazyload alt="shallow&amp;deep-copy.png"><br>​<br>惨考链接：<a target="_blank" rel="noopener" href="https://javaguide.cn/java/basis/java-basic-questions-02.html#%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%8C%BA%E5%88%AB%E4%BA%86%E8%A7%A3%E5%90%97-%E4%BB%80%E4%B9%88%E6%98%AF%E5%BC%95%E7%94%A8%E6%8B%B7%E8%B4%9D">Java Guide 深拷贝和浅拷贝区别</a></p>
 
                 
               </div>
@@ -342,7 +342,7 @@
     
       <span class="category-chain">
         
-  <a href="/spacex/categories/Java%E5%9F%BA%E7%A1%80/" class="category-chain-item">Java基础</a>
+  <a href="/categories/Java%E5%9F%BA%E7%A1%80/" class="category-chain-item">Java基础</a>
   
   
 
@@ -363,7 +363,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>Java的深拷贝和浅拷贝</div>
-      <div>https://huajframe.github.io/spacex/2020/09/24/Java基础/Java的深拷贝和浅拷贝/</div>
+      <div>https://huajframe.github.io/2020/09/24/Java基础/Java的深拷贝和浅拷贝/</div>
     </div>
     <div class="license-meta">
       
@@ -413,7 +413,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/spacex/2020/09/28/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84String%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" title="Java的String学习总结">
+                      <a href="/2020/09/28/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84String%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" title="Java的String学习总结">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Java的String学习总结</span>
                         <span class="visible-mobile">上一篇</span>
@@ -423,7 +423,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/spacex/2020/09/21/Java%E5%9F%BA%E7%A1%80/Java%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B%E7%9A%84%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/" title="java包装类型的缓存机制">
+                      <a href="/2020/09/21/Java%E5%9F%BA%E7%A1%80/Java%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B%E7%9A%84%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/" title="java包装类型的缓存机制">
                         <span class="hidden-mobile">java包装类型的缓存机制</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -574,8 +574,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/spacex/js/events.js" ></script>
-<script  src="/spacex/js/plugins.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -597,7 +597,7 @@
 
 
   
-    <script  src="/spacex/js/img-lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -696,7 +696,7 @@
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script  src="/spacex/js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
 
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
@@ -706,7 +706,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/spacex/js/boot.js" ></script>
+<script  src="/js/boot.js" ></script>
 
 
   
