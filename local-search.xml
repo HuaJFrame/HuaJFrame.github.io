@@ -20,6 +20,14 @@
     </categories>
     
     
+    <tags>
+      
+      <tag>算法</tag>
+      
+      <tag>排序</tag>
+      
+    </tags>
+    
   </entry>
   
   
@@ -41,6 +49,14 @@
     </categories>
     
     
+    <tags>
+      
+      <tag>算法</tag>
+      
+      <tag>排序</tag>
+      
+    </tags>
+    
   </entry>
   
   
@@ -50,7 +66,7 @@
     <link href="/2020/11/01/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3synchronized/"/>
     <url>/2020/11/01/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3synchronized/</url>
     
-    <content type="html"><![CDATA[<blockquote><blockquote><blockquote></blockquote></blockquote></blockquote>]]></content>
+    <content type="html"><![CDATA[<p>TODO</p>]]></content>
     
     
     <categories>
@@ -59,6 +75,16 @@
       
     </categories>
     
+    
+    <tags>
+      
+      <tag>并发编程</tag>
+      
+      <tag>多线程</tag>
+      
+      <tag>同步锁</tag>
+      
+    </tags>
     
   </entry>
   
@@ -79,6 +105,12 @@
     </categories>
     
     
+    <tags>
+      
+      <tag>Java基础</tag>
+      
+    </tags>
+    
   </entry>
   
   
@@ -97,6 +129,14 @@
       
     </categories>
     
+    
+    <tags>
+      
+      <tag>Java基础</tag>
+      
+      <tag>String</tag>
+      
+    </tags>
     
   </entry>
   
@@ -117,6 +157,12 @@
     </categories>
     
     
+    <tags>
+      
+      <tag>Java基础</tag>
+      
+    </tags>
+    
   </entry>
   
   
@@ -135,6 +181,12 @@
       
     </categories>
     
+    
+    <tags>
+      
+      <tag>Java基础</tag>
+      
+    </tags>
     
   </entry>
   
