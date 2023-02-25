@@ -1,0 +1,837 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.ico">
+  <link rel="icon" href="/img/avatar.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="HuaJFrame">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="关键字synchronized的锁优化有哪些、讲一下锁状态和锁升级 优化 Monitor 这类的重量级锁 （轻量级锁）每个线程中的栈帧都会包含一个锁记录对象（Lock Record），内部可以通过 CAS 的方式存储锁定对象的 Mark Word（从而不再一开始就使用 Monitor）  自旋优化当升级到重量级锁竞争时，如果发生竞争失败不会立即进入到 EntryList 进行阻塞，而是会重试一会儿">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JUC">
+<meta property="og:url" content="https://huajframe.github.io/2020/11/06/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/JUC/index.html">
+<meta property="og:site_name" content="HuaJFrame&#39;s Blog">
+<meta property="og:description" content="关键字synchronized的锁优化有哪些、讲一下锁状态和锁升级 优化 Monitor 这类的重量级锁 （轻量级锁）每个线程中的栈帧都会包含一个锁记录对象（Lock Record），内部可以通过 CAS 的方式存储锁定对象的 Mark Word（从而不再一开始就使用 Monitor）  自旋优化当升级到重量级锁竞争时，如果发生竞争失败不会立即进入到 EntryList 进行阻塞，而是会重试一会儿">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://huajframe.github.io/img/category/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B.webp">
+<meta property="article:published_time" content="2020-11-06T01:18:27.000Z">
+<meta property="article:modified_time" content="2023-02-25T12:27:41.120Z">
+<meta property="article:author" content="HuaJFrame">
+<meta property="article:tag" content="并发编程">
+<meta property="article:tag" content="多线程">
+<meta property="article:tag" content="锁">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://huajframe.github.io/img/category/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B.webp">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>JUC - HuaJFrame&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_3909730_i4ycv6dvas.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"huajframe.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"ff7c6cfd7cc027545215f4628adae41a","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?ff7c6cfd7cc027545215f4628adae41a";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<!-- hexo injector head_end start --><meta name="baidu-site-verification" content="code-PAWA8Irgew" /><meta name="google-site-verification" content="pYZPYbeceYaTsQ2hcpC_1kXeReAk4jLXgGEevzZDHLU" /><meta name="msvalidate.01" content="3FE6F2A4F173D6D376B63B594BA8C66D" /><meta name="sogou_site_verification" content="FOv1H2Kmbd" /><meta name="360-site-verification" content="2efd3c81dde62b65030a393647381db7" /><meta name="bytedance-verification-code" content="ureDj1Ba+3Unz0EGuxTt" /><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>HuaJFrame</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="JUC"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-11-06 09:18" pubdate>
+          2020年11月6日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          34 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JUC</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h1><h2 id="synchronized的锁优化有哪些、讲一下锁状态和锁升级"><a href="#synchronized的锁优化有哪些、讲一下锁状态和锁升级" class="headerlink" title="synchronized的锁优化有哪些、讲一下锁状态和锁升级"></a>synchronized的锁优化有哪些、讲一下锁状态和锁升级</h2><ol>
+<li><p>优化 Monitor 这类的重量级锁 （轻量级锁）<br>每个线程中的栈帧都会包含一个锁记录对象（Lock Record），<br>内部可以通过 CAS 的方式存储锁定对象的 Mark Word（从而不再一开始就使用 Monitor）</p>
+</li>
+<li><p>自旋优化<br>当升级到重量级锁竞争时，如果发生竞争失败不会立即进入到 EntryList 进行阻塞，<br>而是会重试一会儿再阻塞</p>
+</li>
+<li><p>优化轻量级锁重入（偏向锁）轻量级锁在没有竞争时，每次重入操作仍需要 CAS，为了避免性能降低，所以引入了偏向锁优化轻量级锁重入，在第一次 CAS 时会将线程的 ID 写入对象的 Mark Word 中,此后线程发现锁定对象中的 Mark Word 存在自己的线程 ID，则不会再次进行 CAS，因为这个对象就归这个线程所有</p>
+</li>
+</ol>
+<hr>
+
+<h2 id="voliate关键字"><a href="#voliate关键字" class="headerlink" title="voliate关键字"></a>voliate关键字</h2><p>原理：</p>
+<p>内存屏障，Memory Barrier（Memory Fence）</p>
+<p>对 volatile 变量的写指令后会加入写屏障（屏障之前，对贡献变量的修改都是会同步到主存中）</p>
+<p>对 volatile 变量的读指令前会加入读屏障（屏障之后，对共享变量的读取都是主存中的新数据）</p>
+<p>作用：</p>
+<ol>
+<li>确保可见性</li>
+<li>确保有序性</li>
+</ol>
+<p>保持内存可见性。所有线程都能看到共享内存的最新状态。每次读取前必须先从主内存刷新最新的值。每次写入后必须立即同步回主内存当中。</p>
+<p>禁止指令重排。提供内存屏障的方式来防止指令被重排，编译器在生成字节码文件时，会在指令序列中插入内存屏障来禁止特定类型的处理器重排序。</p>
+<h1 id="主要类"><a href="#主要类" class="headerlink" title="主要类"></a>主要类</h1><h2 id="什么情况下用-ReentrantLock-而不用-synchronized"><a href="#什么情况下用-ReentrantLock-而不用-synchronized" class="headerlink" title="什么情况下用 ReentrantLock 而不用 synchronized"></a>什么情况下用 ReentrantLock 而不用 synchronized</h2><ol>
+<li>阻塞时可被中断</li>
+<li>可以设置获取锁的超时时间</li>
+<li>可以设置为公平锁</li>
+<li>支持多个条件变量（condition）</li>
+</ol>
+<h2 id="Java的中断怎么实现，为什么-synchronized-不能中断，ReentrantLock-可以中断"><a href="#Java的中断怎么实现，为什么-synchronized-不能中断，ReentrantLock-可以中断" class="headerlink" title="Java的中断怎么实现，为什么 synchronized 不能中断，ReentrantLock 可以中断"></a>Java的中断怎么实现，为什么 synchronized 不能中断，ReentrantLock 可以中断</h2><ol>
+<li>synchronized 是在JVM层面上实现的，在字节码中会有 monitorenter、monitorexit 介入，<br>会自动释放锁定（代码执行完成或者出现异常）</li>
+<li>ReentrantLock 是实现 lock 接口和内部类继承 AQS 实现的，是通过代码实现的</li>
+</ol>
+<h2 id="ReentrantLock-怎么实现的（AQS）"><a href="#ReentrantLock-怎么实现的（AQS）" class="headerlink" title="ReentrantLock 怎么实现的（AQS）"></a>ReentrantLock 怎么实现的（AQS）</h2><p>通过实现 lock 接口以及结合继承了 AQS 的内部类 Sync 实现的</p>
+<h2 id="AQS源码看过吗-能说一下么？"><a href="#AQS源码看过吗-能说一下么？" class="headerlink" title="AQS源码看过吗?能说一下么？"></a>AQS源码看过吗?能说一下么？</h2><ol>
+<li><p>使用 CLH 队列，实现线程阻塞等待以及被唤醒时锁分配的机制</p>
+</li>
+<li><p>独享模式：</p>
+ <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs text">2.1 acquire 操作：<br>    2.1.1. 查看当前是否有线程占用锁，没有则修改 state 和 exclusiveOwnerThread <br>    为当前线程，否则加入 CLH 队列<br>    2.1.2. 加入 CLH 队列的第一个线程，需要初始化头节点，并设置头节点的 waitstatus 为 -1，<br>    next 节点指向当前线程，当前线程的 pre 指向头节点<br>    2.1.3. 当有新的线程加入 CLH 队列时，会重复将 pre 指向上一个节点，上一个节点<br>    的 next 节点指向当前线程并设置上一个节点的 waitstatus 为 -1，而自己的 waitstatus <br>    设置为 0。重复此操作。<br>    2.1.4. 当加入到 CLH 队列的线程获取到锁时，会修改 state 和持有锁的线程修改为当前<br>    线程，并且将 head 移至到当前节点，pre 节点也相应会断掉，之前的 head 节点会被 GC 回收<br>2.2 release 操作：<br>    2.2.1. 检查当前线程是否和 exclusiveOwnerThread 是同一个线程<br>    2.2.2. 修改锁的状态 status ，具体什么是有锁，什么是无锁，由 AQS 的子类定义<br>    2.2.3. 唤醒队列中头节点的下一个节点的线程<br>        2.2.3.1. 将自己的 waitStatus 设为 0<br>        2.2.3.2. 唤醒线程    <br></code></pre></td></tr></table></figure></li>
+<li><p>共享模式：</p>
+ <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs text">3.1 acquire 操作：<br>    3.1.1. 检查当前的 state，是否去持有锁。根据不同的 AQS 子类实现，来允许是否<br>    可以多个线程持有锁比如 CountDownLatch 类不允许，而 ReentrantReadWriteLock 类是允许的<br>    持有锁时只会去修改 state，而不会去修改 exclusiveOwnerThread<br>    3.1.2. 其他情况与独享模式类似<br><br>3.2 release 操作：<br>    3.2.1. 修改 state 字段<br>    3.2.2. 唤醒队列中头节点的下一个节点，如果被唤醒的节点的下一个节点也是 SHARED 模式，<br>    则一同唤醒<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>条件队列</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs text">4.1 await 操作<br>     4.1.1. 创建条件节点，如果是作为第一个节点加入，则需要初始化队列，<br>     即初始化一个 head 节点，再把自己加入进去，作为 head 节点的 nextWaiter；<br>     否则直接加入，并使上一个节点的 nextWaiter 指向自己<br>     4.1.2. 释放当前线程占用的锁，执行 AQS 的 release 操作<br>     4.1.3. 挂起当前线程<br>     4.1.4. 被唤醒以后，执行 AQS 的 acquire 操作<br> 4.2 signal 操作：<br>     4.2.1. 将队列中的 firstWaiter 节点转移到同步队列中<br>     4.2.2. 把刚刚加入到同步队列中的节点的前驱的 waitStatus 设置为 -1 <br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="ThreadLocal，底层如何实现"><a href="#ThreadLocal，底层如何实现" class="headerlink" title="ThreadLocal，底层如何实现"></a>ThreadLocal，底层如何实现</h2><p>每个线程内都有一个ThreadLocalMap类型的成员变量，用来存储资源对象</p>
+<p>ThreadLocal是JDK包提供的，它提供了线程本地变量，也就是如果你创建了一个ThreadLocal变量，<br>那么但凡有一个线程对这个变量进行 set 操作时，这个线程中的 threadLocals 属性就会被创建赋值</p>
+<p>所以当多个线程操作这个变量时，实际操作的是自己本地内存里面的变量，从而避免了线程安全问题</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">set</span><span class="hljs-params">(T value)</span> &#123;            <br>    <span class="hljs-type">Thread</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> Thread.currentThread();	<span class="hljs-comment">// 拿到当前线程</span><br>    <span class="hljs-type">ThreadLocalMap</span> <span class="hljs-variable">map</span> <span class="hljs-operator">=</span> getMap(t);   	<span class="hljs-comment">// 拿到当前线程的 threadLocals 属性</span><br>    <span class="hljs-keyword">if</span> (map != <span class="hljs-literal">null</span>) &#123;                	<br>        map.set(<span class="hljs-built_in">this</span>, value);         	<span class="hljs-comment">// 不为空进行覆盖</span><br>    &#125; <span class="hljs-keyword">else</span> &#123;                          <br>        createMap(t, value);          	<span class="hljs-comment">// 为空则创建赋值</span><br>    &#125;                                 <br>&#125;                                     <br></code></pre></td></tr></table></figure>
+
+<h1 id="工具类"><a href="#工具类" class="headerlink" title="工具类"></a>工具类</h1><h2 id="Java并发包下的原子工具类，能说一下么？源码看过吗？"><a href="#Java并发包下的原子工具类，能说一下么？源码看过吗？" class="headerlink" title="Java并发包下的原子工具类，能说一下么？源码看过吗？"></a>Java并发包下的原子工具类，能说一下么？源码看过吗？</h2><p>AtomicBoolean</p>
+<p>AtomicInteger</p>
+<p>AtomicLong</p>
+<p>AtomicReference</p>
+<p>AtomicIntegerArray</p>
+<p>AtomicLongArray</p>
+<p>AtomicReferenceArray</p>
+<p>都是以CAS方式确保原子性，但是可能会触发ABA问题</p>
+<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><h2 id="为什么使用CAS就能保证并发"><a href="#为什么使用CAS就能保证并发" class="headerlink" title="为什么使用CAS就能保证并发?"></a>为什么使用CAS就能保证并发?</h2><p>无需阻塞等待，立马执行，立马返回成功或失败</p>
+<h2 id="ABA问题及解决办法"><a href="#ABA问题及解决办法" class="headerlink" title="ABA问题及解决办法"></a>ABA问题及解决办法</h2><ol>
+<li>AtomicStampedReference 需要我们传入整型变量作为版本号，来判定是否被更改过<br>但是有时候，并不关心引用变量更改了几次，只是单纯的关心是否更改过，就使用：</li>
+<li>AtomicMarkableReference 需要我们传入布尔变量作为标记，来判断是否被更改过</li>
+</ol>
+<h2 id="IO密集和CPU密集两种情况下，线程池里的线程数应该怎么设置"><a href="#IO密集和CPU密集两种情况下，线程池里的线程数应该怎么设置" class="headerlink" title="IO密集和CPU密集两种情况下，线程池里的线程数应该怎么设置"></a>IO密集和CPU密集两种情况下，线程池里的线程数应该怎么设置</h2><p>IO密集型的话，是指系统大部分时间在跟I&#x2F;O交互，而这个时间线程不会占用CPU来处理，即在这个时间范围内，可以由其他线程来使用CPU，因而可以多配置一些线程。</p>
+<p>CPU密集型的话，一般配置CPU处理器个数+1个线程， n + 1<br>所谓CPU密集型就是指系统大部分时间是在做程序正常的计算任务，例如数字运算、赋值、分配内存、内存拷贝、循环、查找、排序等，这些处理都需要CPU来完成。</p>
+<h2 id="Java中创建多线程的方式有哪些"><a href="#Java中创建多线程的方式有哪些" class="headerlink" title="Java中创建多线程的方式有哪些"></a>Java中创建多线程的方式有哪些</h2><ol>
+<li>继承Thread，重写run方法；方便传参，但不支持多继承</li>
+<li>使用Runnable配合Thread；解耦强，灵活</li>
+<li>FutureTask结合Thread；可以获得放回结果</li>
+</ol>
+<h2 id="乐观锁和悲观锁的区别"><a href="#乐观锁和悲观锁的区别" class="headerlink" title="乐观锁和悲观锁的区别"></a>乐观锁和悲观锁的区别</h2><p>悲观锁：拿到资源时，就对资源上锁，并在提交后，才释放锁资源，其他线程才能使用资源。</p>
+<p>乐观锁：拿到资源时，上乐观锁，在提交之前，其他的锁也可以操作这个资源，当有冲突的时候，并发机制会保留前一个提交，打回后一个提交，让后一个线程重新获取资源后，再操作，然后提交。类似于 Git</p>
+<p>吞吐量：乐观锁 &gt; 悲观锁</p>
+<p>适用场景：读取频繁用乐观锁，写入频繁用悲观锁</p>
+<p>特别地，如果吞吐量大，但是乐观锁获取锁的所消耗的性能又高，这个时候就不推荐适用乐观锁了</p>
+<h2 id="什么是死锁，怎么破坏死锁"><a href="#什么是死锁，怎么破坏死锁" class="headerlink" title="什么是死锁，怎么破坏死锁"></a>什么是死锁，怎么破坏死锁</h2><p>死锁成立的四个条件：</p>
+<p><strong>互斥</strong>：某种资源只允许一个进程访问</p>
+<p><strong>占有且等待</strong>：一个进程本身占有了资源（一个或多个），同时还有资源未得到满足，正在等待其他进程释放该资源</p>
+<p><strong>不可抢占</strong>：无法抢占别人占有的资源</p>
+<p><strong>循环等待</strong>：存在一个进程链，使得每个进程都占有下一个进程所需的至少一种资源</p>
+<p>打破上述任何一个条件，便可让死锁消失</p>
+<h1 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h1><h2 id="线程池有哪些参数"><a href="#线程池有哪些参数" class="headerlink" title="线程池有哪些参数"></a>线程池有哪些参数</h2><ol>
+<li>核心线程数</li>
+<li>最大线程数</li>
+<li>保持存活时间</li>
+<li>时间单位</li>
+<li>线程工厂</li>
+<li>阻塞队列</li>
+<li>拒绝策略</li>
+</ol>
+<h2 id="执行流程是什么？"><a href="#执行流程是什么？" class="headerlink" title="执行流程是什么？"></a>执行流程是什么？</h2><p>当一个任务传给线程池以后，可能有以下几种可能</p>
+<ol>
+<li>将任务分配给一个核心线程来执行</li>
+<li>核心线程都在执行任务，将任务放到阻塞队列workQueue中等待被执行</li>
+<li>阻塞队列满了，使用救急线程来执行任务；救急线程用完以后，超过生存时间（keepAliveTime）后会被释放</li>
+<li>任务总数大于了 最大线程数（maximumPoolSize）与阻塞队列容量的最大值（workQueue.capacity），使用拒接策略</li>
+</ol>
+<h2 id="拒绝策略有哪些？"><a href="#拒绝策略有哪些？" class="headerlink" title="拒绝策略有哪些？"></a>拒绝策略有哪些？</h2><ol>
+<li>AbortPolicy（堕胎政策-默认）：直接<strong>抛出RejectedExecutionException</strong>异常阻止系统正常运行</li>
+<li>CallerRunsPolicy （调用者运行政策）:一种调节机制，该策略<strong>既不会抛弃任务，也不会抛出异常</strong>，而是将某些任务回退到调用者，从而降低新任务的流量</li>
+<li>DiscardOldestPolicy（丢弃老的政策）：<strong>抛弃队列中等待最久的任务</strong>，然后把当前任务加入队列中尝试再次提交当前任务</li>
+<li>DiscardPolicy（丢弃政策）：该策略默默地<strong>丢弃无法处理的任务，无予任何处理也不抛出异常</strong>。如果允许任务丢失，这是最好的一种策略</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="category-chain-item">Java并发编程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">#并发编程</a>
+      
+        <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">#多线程</a>
+      
+        <a href="/tags/%E9%94%81/">#锁</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>JUC</div>
+      <div>https://huajframe.github.io/2020/11/06/Java并发编程/JUC/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>HuaJFrame</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年11月6日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/11/19/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/" title="MySQL">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MySQL</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/10/18/Spring-Project/Spring/Spring/" title="Spring">
+                        <span class="hidden-mobile">Spring</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

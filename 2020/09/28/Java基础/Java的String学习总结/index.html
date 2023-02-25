@@ -1,0 +1,801 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.ico">
+  <link rel="icon" href="/img/avatar.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="HuaJFrame">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1 String是不可变的1.1 首先String是不可变的，具体原因主要有以下两点 String中保存字符串的数组被final修饰且是私有属性，而且String没有暴露给外界任何可以修改该字符串的方法； String 类被 final 修饰导致其不能被继承，进而避免了子类破坏 String 不可变。123456public final class String    implements jav">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java的String学习总结">
+<meta property="og:url" content="https://huajframe.github.io/2020/09/28/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84String%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="HuaJFrame&#39;s Blog">
+<meta property="og:description" content="1 String是不可变的1.1 首先String是不可变的，具体原因主要有以下两点 String中保存字符串的数组被final修饰且是私有属性，而且String没有暴露给外界任何可以修改该字符串的方法； String 类被 final 修饰导致其不能被继承，进而避免了子类破坏 String 不可变。123456public final class String    implements jav">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://huajframe.github.io/img/category/Java.jpeg">
+<meta property="article:published_time" content="2020-09-28T06:46:23.000Z">
+<meta property="article:modified_time" content="2022-11-27T08:23:15.331Z">
+<meta property="article:author" content="HuaJFrame">
+<meta property="article:tag" content="Java基础">
+<meta property="article:tag" content="String">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://huajframe.github.io/img/category/Java.jpeg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Java的String学习总结 - HuaJFrame&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_3909730_i4ycv6dvas.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"huajframe.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"ff7c6cfd7cc027545215f4628adae41a","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?ff7c6cfd7cc027545215f4628adae41a";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<!-- hexo injector head_end start --><meta name="baidu-site-verification" content="code-PAWA8Irgew" /><meta name="google-site-verification" content="pYZPYbeceYaTsQ2hcpC_1kXeReAk4jLXgGEevzZDHLU" /><meta name="msvalidate.01" content="3FE6F2A4F173D6D376B63B594BA8C66D" /><meta name="sogou_site_verification" content="FOv1H2Kmbd" /><meta name="360-site-verification" content="2efd3c81dde62b65030a393647381db7" /><meta name="bytedance-verification-code" content="ureDj1Ba+3Unz0EGuxTt" /><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>HuaJFrame</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Java的String学习总结"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-09-28 14:46" pubdate>
+          2020年9月28日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          35 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java的String学习总结</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="1-String是不可变的"><a href="#1-String是不可变的" class="headerlink" title="1 String是不可变的"></a>1 <code>String</code>是不可变的</h3><h4 id="1-1-首先String是不可变的，具体原因主要有以下两点"><a href="#1-1-首先String是不可变的，具体原因主要有以下两点" class="headerlink" title="1.1 首先String是不可变的，具体原因主要有以下两点"></a>1.1 首先<code>String</code>是不可变的，具体原因主要有以下两点</h4><ol>
+<li><code>String</code>中保存字符串的数组被<code>final</code>修饰且是私有属性，而且<code>String</code>没有暴露给外界任何可以修改该字符串的方法；</li>
+<li><code>String</code> 类被 <code>final</code> 修饰导致其不能被继承，进而避免了子类破坏 <code>String</code> 不可变。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">String</span><br>    <span class="hljs-keyword">implements</span> <span class="hljs-title class_">java</span>.io.Serializable, Comparable&lt;String&gt;, CharSequence &#123;<br>    <span class="hljs-comment">/** The value is used for character storage. */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">char</span> value[];<br>    ...<br>&#125;<br></code></pre></td></tr></table></figure>
+注意：JDK9及后将保存字符串的数组由<code>char</code>改为了<code>byte</code></li>
+</ol>
+<p>详细参见：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20618891/answer/114125846" title="如何理解 String 类型值的不可变？">如何理解 String 类型值的不可变？</a></p>
+<h4 id="1-2-既然String不可变那它是怎样实现修改的呢？"><a href="#1-2-既然String不可变那它是怎样实现修改的呢？" class="headerlink" title="1.2 既然String不可变那它是怎样实现修改的呢？"></a>1.2 既然<code>String</code>不可变那它是怎样实现修改的呢？</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;1&quot;</span>;<br>s = <span class="hljs-string">&quot;2&quot;</span>;<br></code></pre></td></tr></table></figure>
+<p>上述代码转换为字节码后</p>
+<div align=center>
+    <img src="/2020/09/28/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84String%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/10004.jpg" srcset="/img/loading.gif" lazyload class="" title="加载失败">
+</div>
+
+<p>上述字节码表示会在字符串常量池中新建一个字符串并加载</p>
+<h3 id="2-String拼接"><a href="#2-String拼接" class="headerlink" title="2 String拼接"></a>2 <code>String</code>拼接</h3><h4 id="2-1-拼接方式"><a href="#2-1-拼接方式" class="headerlink" title="2.1 拼接方式"></a>2.1 拼接方式</h4><p><code>String</code>有两种拼接字符串方法</p>
+<ul>
+<li><code>+</code>和<code>+=</code>拼接</li>
+<li><code>StringBuilder</code>和<code>StringBuffer</code>的<code>append(String str)</code>方法，拼接完成后调用他们的<code>toString()</code>方法获得<code>String</code>对象</li>
+</ul>
+<p><strong>注意</strong>：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-built_in">String</span> 中的对象是不可变的，也就可以理解为常量，线程安全;<br><span class="hljs-built_in">StringBuffer</span> 对方法加了同步锁或者对调用的方法加了同步锁，所以是线程安全的。StringBuilder并没有对方法进行加<br>同步锁，所以是非线程安全的。<br></code></pre></td></tr></table></figure>
+
+<h4 id="2-2-和-拼接的实质"><a href="#2-2-和-拼接的实质" class="headerlink" title="2.2 +和+=拼接的实质"></a>2.2 <code>+</code>和<code>+=</code>拼接的实质</h4><p>实际上<code>+</code>和<code>+=</code>是Java专门为<code>String</code>重载的运算符，java本身是不支持运算符重载的，<code>+</code>和<code>+=</code>也是 Java 中仅有的两个重载过的运算符</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">str1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;s&quot;</span>;<br><span class="hljs-type">String</span> <span class="hljs-variable">str2</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;zh&quot;</span>;<br><span class="hljs-type">String</span> <span class="hljs-variable">str4</span> <span class="hljs-operator">=</span> str1 + str2;<br></code></pre></td></tr></table></figure>
+<p>上述代码对应的字节码为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">str1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;s&quot;</span>;<br><span class="hljs-type">String</span> <span class="hljs-variable">str2</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;zh&quot;</span>;<br>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>()).append(str1).append(str2).toString();<br></code></pre></td></tr></table></figure>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/56ab1aedc97546908c74352416442b09~tplv-k3u1fbpfcp-watermark.image" srcset="/img/loading.gif" lazyload alt="2.png"><br>由字节码看出实际上是由<code>StringBuilder</code>实现拼接的</p>
+<h4 id="2-3-注意"><a href="#2-3-注意" class="headerlink" title="2.3 注意"></a>2.3 注意</h4><p>有一点注意的是：在循环内最好不要用<code>+</code>和<code>+=</code>来拼接字符串，因为不会在循环外部创建一个<code>StringBuild</code>对象来进行复用，而是在每次循环是都会创建一个<code>StringBuild</code>对象，造成资源的浪费</p>
+<h5 id="2-3-1-拼接"><a href="#2-3-1-拼接" class="headerlink" title="2.3.1 +=拼接"></a>2.3.1 <code>+=</code>拼接</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">String[] arr = &#123;<span class="hljs-string">&quot;he&quot;</span>, <span class="hljs-string">&quot;llo&quot;</span>, <span class="hljs-string">&quot;world&quot;</span>&#125;;<br><span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br><span class="hljs-keyword">for</span> (String value : arr) &#123;<br>    str += value;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>字节码在循环体内部创建<code>StringBuild</code>对象：<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/851a6ceee3074ec8ba3c04de82f2afbd~tplv-k3u1fbpfcp-watermark.image" srcset="/img/loading.gif" lazyload alt="Snipaste_2022-10-02_14-49-03.png"></p>
+<h5 id="2-3-2-循环外部创建StringBuild对象"><a href="#2-3-2-循环外部创建StringBuild对象" class="headerlink" title="2.3.2 循环外部创建StringBuild对象"></a>2.3.2 循环外部创建<code>StringBuild</code>对象</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">String[] arr = &#123;<span class="hljs-string">&quot;he&quot;</span>, <span class="hljs-string">&quot;llo&quot;</span>, <span class="hljs-string">&quot;world&quot;</span>&#125;;<br><span class="hljs-type">StringBuilder</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br><span class="hljs-keyword">for</span> (String value : arr) &#123;<br>    s.append(value);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>字节码只创建了一个<code>StringBuild</code>对象<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dc9bb12d712e47c1a57ea16fa96334b4~tplv-k3u1fbpfcp-watermark.image" srcset="/img/loading.gif" lazyload alt="3.png"></p>
+<h3 id="3-符串常量池"><a href="#3-符串常量池" class="headerlink" title="3 符串常量池"></a>3 符串常量池</h3><h4 id="3-1-什么是字符串常量池"><a href="#3-1-什么是字符串常量池" class="headerlink" title="3.1 什么是字符串常量池"></a>3.1 什么是字符串常量池</h4><p><strong>字符串常量池</strong> 是 JVM 为了提升性能和减少内存消耗针对字符串（String 类）专门开辟的一块区域，主要目的是为了避免字符串的重复创建。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">str1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;111&quot;</span>;<br><span class="hljs-type">String</span> <span class="hljs-variable">str2</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;111&quot;</span>;<br><span class="hljs-type">String</span> <span class="hljs-variable">str3</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;111&quot;</span>);<br><span class="hljs-comment">//str1和str2都是常量池中的地址，所以他们是相同的</span><br>System.out.println(str1 == str2); <span class="hljs-comment">//true</span><br><span class="hljs-comment">//str1是常量池中的地址，str3是堆内存中的地址</span><br>System.out.println(str1 == str3);  <span class="hljs-comment">//false</span><br></code></pre></td></tr></table></figure>
+<p>注意：在 Jdk6 以及以前的版本中，字符串的常量池是放在堆的 Perm 区的，Perm 区是一个类静态的区域，主要存储一些加载类的信息，常量池，方法片段等内容，默认大小只有4m，一旦常量池中大量使用 intern 是会直接产生<code>java.lang.OutOfMemoryError: PermGen space</code>错误的。 所以在 jdk7 的版本中，字符串常量池已经从 Perm 区移到正常的 Java Heap 区域了。为什么要移动，Perm 区域太小是一个主要原因，当然据消息称 jdk8 已经直接取消了 Perm 区域，而新建立了一个元区域。应该是 jdk 开发者认为 Perm 区域已经不适合现在 JAVA 的发展了。</p>
+<h4 id="3-2-String-s1-x3D-new-String-“111”-这句话创建了几个字符串对象？"><a href="#3-2-String-s1-x3D-new-String-“111”-这句话创建了几个字符串对象？" class="headerlink" title="3.2 String s1 &#x3D; new String(“111”);这句话创建了几个字符串对象？"></a>3.2 String s1 &#x3D; new String(“111”);这句话创建了几个字符串对象？</h4><p>答：会创建1个或两个对象</p>
+<h5 id="3-2-1-如果常量池中不存在111字符串，那么该句子会创建两个对象，在堆区创建一个字符串对象，在常量池中创建一个对象"><a href="#3-2-1-如果常量池中不存在111字符串，那么该句子会创建两个对象，在堆区创建一个字符串对象，在常量池中创建一个对象" class="headerlink" title="3.2.1 如果常量池中不存在111字符串，那么该句子会创建两个对象，在堆区创建一个字符串对象，在常量池中创建一个对象"></a>3.2.1 如果常量池中不存在<code>111</code>字符串，那么该句子会创建两个对象，在堆区创建一个字符串对象，在常量池中创建一个对象</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">str3</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;111&quot;</span>);<br></code></pre></td></tr></table></figure>
+<p>对应的字节码：<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0faf1ff599714be0a1efb95ee1bda147~tplv-k3u1fbpfcp-watermark.image" srcset="/img/loading.gif" lazyload alt="5.png"><br><code>ldc</code> 命令用于判断字符串常量池中是否保存了对应的字符串对象的引用，如果保存了的话直接返回，如果没有保存的话，会在堆中创建对应的字符串对象并将该字符串对象的引用保存到字符串常量池中。</p>
+<h5 id="3-2-2-如果常量池中存在111字符串，那么该句子指挥创建一个对象，即在堆区创建一个字符串对象"><a href="#3-2-2-如果常量池中存在111字符串，那么该句子指挥创建一个对象，即在堆区创建一个字符串对象" class="headerlink" title="3.2.2 如果常量池中存在111字符串，那么该句子指挥创建一个对象，即在堆区创建一个字符串对象"></a>3.2.2 如果常量池中存在<code>111</code>字符串，那么该句子指挥创建一个对象，即在堆区创建一个字符串对象</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">str1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;111&quot;</span>;<br><span class="hljs-type">String</span> <span class="hljs-variable">str3</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;111&quot;</span>);<br></code></pre></td></tr></table></figure>
+<p>对应的字节码：<br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7e67b6a73da54772bdc99dd383e65fbb~tplv-k3u1fbpfcp-watermark.image" srcset="/img/loading.gif" lazyload alt="4.png"></p>
+<p>第7行已经存在就不会再添加了</p>
+<h4 id="3-3-String的intern方法"><a href="#3-3-String的intern方法" class="headerlink" title="3.3 String的intern方法"></a>3.3 <code>String</code>的<code>intern</code>方法</h4><p><code>String.intern()</code> 是一个 native（本地）方法，其作用是将指定的字符串对象的引用保存在字符串常量池中，可以简单分为两种情况：</p>
+<ul>
+<li>如果字符串常量池中保存了对应的字符串，就直接返回该引用</li>
+<li>如果字符串常量池中没有保存对应的字符串，那就在常量池中创建一个指向该字符串对象的引用并返回</li>
+</ul>
+<p>示例代码（JDK 8） :</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 在堆中创建字符串对象”Java“</span><br><span class="hljs-comment">// 将字符串对象”Java“的引用保存在字符串常量池中</span><br><span class="hljs-type">String</span> <span class="hljs-variable">s1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Java&quot;</span>;<br><span class="hljs-comment">// 直接返回字符串常量池中字符串对象”Java“对应的引用</span><br><span class="hljs-type">String</span> <span class="hljs-variable">s2</span> <span class="hljs-operator">=</span> s1.intern();<br><span class="hljs-comment">// 会在堆中在单独创建一个字符串对象</span><br><span class="hljs-type">String</span> <span class="hljs-variable">s3</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;Java&quot;</span>);<br><span class="hljs-comment">// 直接返回字符串常量池中字符串对象”Java“对应的引用</span><br><span class="hljs-type">String</span> <span class="hljs-variable">s4</span> <span class="hljs-operator">=</span> s3.intern();<br><span class="hljs-comment">// s1 和 s2 指向的是堆中的同一个对象</span><br>System.out.println(s1 == s2); <span class="hljs-comment">// true</span><br><span class="hljs-comment">// s3 和 s4 指向的是堆中不同的对象</span><br>System.out.println(s3 == s4); <span class="hljs-comment">// false</span><br><span class="hljs-comment">// s1 和 s4 指向的是堆中的同一个对象</span><br>System.out.println(s1 == s4); <span class="hljs-comment">//true</span><br><br></code></pre></td></tr></table></figure>
+<p>摘自：<a target="_blank" rel="noopener" href="https://javaguide.cn/java/basis/java-basic-questions-02.html#intern-%E6%96%B9%E6%B3%95%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8">Java Guide intern 方法有什么作用</a></p>
+<p>更加详细的解释：<a target="_blank" rel="noopener" href="https://tech.meituan.com/2014/03/06/in-depth-understanding-string-intern.html">深入解析String#intern</a></p>
+<h3 id="4-常量折叠"><a href="#4-常量折叠" class="headerlink" title="4 常量折叠"></a>4 常量折叠</h3><h4 id="4-1-无final修饰"><a href="#4-1-无final修饰" class="headerlink" title="4.1 无final修饰"></a>4.1 无final修饰</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">str1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;s&quot;</span>;<br><span class="hljs-type">String</span> <span class="hljs-variable">str2</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;zh&quot;</span>;<br><span class="hljs-type">String</span> <span class="hljs-variable">str3</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;s&quot;</span> + <span class="hljs-string">&quot;zh&quot;</span>;<br><span class="hljs-type">String</span> <span class="hljs-variable">str4</span> <span class="hljs-operator">=</span> str1 + str2;<br></code></pre></td></tr></table></figure>
+<p>字节码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">str1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;s&quot;</span>;<br><span class="hljs-type">String</span> <span class="hljs-variable">str2</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;zh&quot;</span>;<br><span class="hljs-comment">//直接拼接了</span><br><span class="hljs-type">String</span> <span class="hljs-variable">str3</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;szh&quot;</span>;<br>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>()).append(str1).append(str2).toString();<br></code></pre></td></tr></table></figure>
+<p>常量折叠会把常量表达式的值求出来作为常量嵌在最终生成的代码中，这是 Javac 编译器会对源代码做的极少量优化措施之一(代码优化几乎都在即时编译器中进行)。</p>
+<p>并不是所有的常量都会进行折叠，只有编译器在程序编译期就可以确定值的常量才可以：</p>
+<ul>
+<li>基本数据类型( <code>byte</code>、<code>boolean</code>、<code>short</code>、<code>char</code>、<code>int</code>、<code>float</code>、<code>long</code>、<code>double</code>)以及字符串常量。</li>
+<li><code>final</code> 修饰的基本数据类型和字符串变量</li>
+<li>字符串通过 “+”拼接得到的字符串、基本数据类型之间算数运算（加减乘除）、基本数据类型的位运算（&lt;&lt;、&gt;&gt;、&gt;&gt;&gt; ）</li>
+</ul>
+<p><strong>引用的值在程序编译期是无法确定的，编译器无法对其进行优化。</strong></p>
+<h4 id="4-2-与final修饰"><a href="#4-2-与final修饰" class="headerlink" title="4.2 与final修饰"></a>4.2 与final修饰</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">str1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;s&quot;</span>;<br><span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">str2</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;zh&quot;</span>;<br><span class="hljs-type">String</span> <span class="hljs-variable">str3</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;s&quot;</span> + <span class="hljs-string">&quot;zh&quot;</span>;<br><span class="hljs-type">String</span> <span class="hljs-variable">str4</span> <span class="hljs-operator">=</span> str1 + str2;<br></code></pre></td></tr></table></figure>
+<p>字节码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">str1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;s&quot;</span>;<br><span class="hljs-type">String</span> <span class="hljs-variable">str2</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;zh&quot;</span>;<br><span class="hljs-type">String</span> <span class="hljs-variable">str3</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;szh&quot;</span>;<br><span class="hljs-type">String</span> <span class="hljs-variable">str4</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;szh&quot;</span>;<br><span class="hljs-comment">//str3和str4都进行了折叠</span><br></code></pre></td></tr></table></figure>
+<p>被 <code>final</code> 关键字修改之后的 <code>String</code> 会被编译器当做常量来处理，编译器在程序编译期就可以确定它的值，其效果就相当于访问常量。</p>
+<p>详细介绍：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/55976094/answer/147302764">常量折叠</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li>Java Guide Java基础常见面试题总结(中) String &amp;nbsp;&amp;nbsp;&amp;nbsp;<a target="_blank" rel="noopener" href="https://javaguide.cn/java/basis/java-basic-questions-02.html#string">https://javaguide.cn/java/basis/java-basic-questions-02.html#string</a></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java%E5%9F%BA%E7%A1%80/" class="category-chain-item">Java基础</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Java%E5%9F%BA%E7%A1%80/">#Java基础</a>
+      
+        <a href="/tags/String/">#String</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Java的String学习总结</div>
+      <div>https://huajframe.github.io/2020/09/28/Java基础/Java的String学习总结/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>HuaJFrame</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年9月28日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/10/02/Java%E5%9F%BA%E7%A1%80/Java%E6%B3%9B%E5%9E%8B%E5%92%8C%E6%B3%9B%E5%9E%8B%E9%80%9A%E9%85%8D%E7%AC%A6/" title="Java泛型和泛型通配符">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java泛型和泛型通配符</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/09/24/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/" title="Java的深拷贝和浅拷贝">
+                        <span class="hidden-mobile">Java的深拷贝和浅拷贝</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
