@@ -16,27 +16,24 @@
   <meta name="author" content="HuaJFrame">
   <meta name="keywords" content="">
   
-    <meta name="description" content="HTTPS概念 HTTPS（Hypertext Transfer Protocol Secure：超文本传输安全协议）是一种透过计算机网络进行安全通信的传输协议。 HTTPS 经由 HTTP 进行通信，但利用 SSL&#x2F;TLS 来加密数据包。HTTPS 开发的主要目的，是提供对网站服务器的身份认证，保护交换数据的隐私与完整性。  与HTTP的对比默认端口 HTTPS 默认工作在 TCP 协">
+    <meta name="description" content="转自： https:&#x2F;&#x2F;www.cnblogs.com&#x2F;zxin&#x2F;archive&#x2F;2013&#x2F;01&#x2F;26&#x2F;2877765.html  一、校验数字的表达式12345678910111213141516171819202122232425262728293031323334353637数字：^[0-9]*$n位的数字：^\d&amp;#123;n&amp;#125;$至少n位的数字：^\d&amp;#123;n,&amp;#125">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HTTPS">
-<meta property="og:url" content="https://huajframe.github.io/2021/02/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTPS/index.html">
+<meta property="og:title" content="常用正则表达式">
+<meta property="og:url" content="https://huajframe.github.io/2023/03/05/%E5%B7%A5%E5%85%B7/%E5%B8%B8%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html">
 <meta property="og:site_name" content="HuaJFrame&#39;s Blog">
-<meta property="og:description" content="HTTPS概念 HTTPS（Hypertext Transfer Protocol Secure：超文本传输安全协议）是一种透过计算机网络进行安全通信的传输协议。 HTTPS 经由 HTTP 进行通信，但利用 SSL&#x2F;TLS 来加密数据包。HTTPS 开发的主要目的，是提供对网站服务器的身份认证，保护交换数据的隐私与完整性。  与HTTP的对比默认端口 HTTPS 默认工作在 TCP 协">
+<meta property="og:description" content="转自： https:&#x2F;&#x2F;www.cnblogs.com&#x2F;zxin&#x2F;archive&#x2F;2013&#x2F;01&#x2F;26&#x2F;2877765.html  一、校验数字的表达式12345678910111213141516171819202122232425262728293031323334353637数字：^[0-9]*$n位的数字：^\d&amp;#123;n&amp;#125;$至少n位的数字：^\d&amp;#123;n,&amp;#125">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://huajframe.github.io/img/category/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.jpg">
-<meta property="article:published_time" content="2021-02-02T10:25:15.000Z">
-<meta property="article:modified_time" content="2023-03-03T05:17:38.472Z">
+<meta property="article:published_time" content="2023-03-05T11:24:44.000Z">
+<meta property="article:modified_time" content="2023-03-05T12:03:28.558Z">
 <meta property="article:author" content="HuaJFrame">
-<meta property="article:tag" content="计算机网络">
-<meta property="article:tag" content="HTTPS">
+<meta property="article:tag" content="正则表达式">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://huajframe.github.io/img/category/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>HTTPS - HuaJFrame&#39;s Blog</title>
+  <title>常用正则表达式 - HuaJFrame&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -245,7 +242,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="HTTPS"></span>
+            <span id="subtitle" data-typed-text="常用正则表达式"></span>
           
         </div>
 
@@ -256,8 +253,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2021-02-02 18:25" pubdate>
-          2021年2月2日 晚上
+        <time datetime="2023-03-05 19:24" pubdate>
+          2023年3月5日 晚上
         </time>
       </span>
     
@@ -268,7 +265,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          4.3k 字
         
       </span>
     
@@ -279,7 +276,7 @@
         
         
         
-          16 分钟
+          36 分钟
         
       </span>
     
@@ -325,68 +322,20 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">HTTPS</h1>
+            <h1 style="display: none">常用正则表达式</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
-<li>HTTPS（Hypertext Transfer Protocol Secure：超文本传输安全协议）是一种透过计算机网络进行安全通信的传输协议。</li>
-<li>HTTPS 经由 HTTP 进行通信，但利用 <strong>SSL&#x2F;TLS 来加密数据包</strong>。HTTPS 开发的主要目的，是提供对网站服务器的身份认证，保护交换数据的隐私与完整性。</li>
-</ul>
-<h2 id="与HTTP的对比"><a href="#与HTTP的对比" class="headerlink" title="与HTTP的对比"></a>与HTTP的对比</h2><h3 id="默认端口"><a href="#默认端口" class="headerlink" title="默认端口"></a>默认端口</h3><ul>
-<li>HTTPS 默认工作在 TCP 协议443端口</li>
-<li>HTTP 默认工作在 TCP 协议 80 端口</li>
-</ul>
-<h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><ul>
-<li>HTTPS（SSL+HTTP） 数据传输过程是加密的，安全性较好</li>
-<li>HTTP 明文传输，数据都是未加密的，安全性较差</li>
-</ul>
-<h3 id="协议证书"><a href="#协议证书" class="headerlink" title="协议证书"></a>协议证书</h3><ul>
-<li>使用 HTTPS 协议需要到** CA（Certificate Authority，数字证书认证机构）** 申请证书，一般免费证书较少，因而需要一定费用。</li>
-<li>HTTP不用</li>
-</ul>
-<h3 id="响应速度"><a href="#响应速度" class="headerlink" title="响应速度"></a>响应速度</h3><ul>
-<li>HTTPS除了 TCP 的三个包，还要加上 ssl 握手需要的 9 个包，所以一共是 12 个包</li>
-<li>HTTP 使用 TCP 三次握手建立连接，客户端和服务器需要交换 3 个包</li>
-</ul>
-<h3 id="资源消耗"><a href="#资源消耗" class="headerlink" title="资源消耗"></a>资源消耗</h3><ul>
-<li>HTTPS因为要加上ssl握手需要的包，所以会根据消耗资源</li>
-<li>HTTP不需要ssl握手</li>
-</ul>
-<h3 id="握手过程对比"><a href="#握手过程对比" class="headerlink" title="握手过程对比"></a>握手过程对比</h3><h4 id="HTTPS-1"><a href="#HTTPS-1" class="headerlink" title="HTTPS"></a>HTTPS</h4><div align="center">
+                <blockquote>
+<p>转自： <a target="_blank" rel="noopener" href="https://www.cnblogs.com/zxin/archive/2013/01/26/2877765.html">https://www.cnblogs.com/zxin/archive/2013/01/26/2877765.html</a></p>
+</blockquote>
+<h3 id="一、校验数字的表达式"><a href="#一、校验数字的表达式" class="headerlink" title="一、校验数字的表达式"></a>一、校验数字的表达式</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs TEXT">数字：^[0-9]*$<br><br>n位的数字：^\d&#123;n&#125;$<br><br>至少n位的数字：^\d&#123;n,&#125;$<br><br>m-n位的数字：^\d&#123;m,n&#125;$<br><br>零和非零开头的数字：^(0|[1-9][0-9]*)$<br><br>非零开头的最多带两位小数的数字：^([1-9][0-9]*)+(.[0-9]&#123;1,2&#125;)?$<br><br>带1-2位小数的正数或负数：^(\-)?\d+(\.\d&#123;1,2&#125;)?$<br><br>正数、负数、和小数：^(\-|\+)?\d+(\.\d+)?$<br><br>有两位小数的正实数：^[0-9]+(.[0-9]&#123;2&#125;)?$<br><br>有1~3位小数的正实数：^[0-9]+(.[0-9]&#123;1,3&#125;)?$<br><br>非零的正整数：^[1-9]\d*$ 或 ^([1-9][0-9]*)&#123;1,3&#125;$ 或 ^\+?[1-9][0-9]*$<br><br>非零的负整数：^\-[1-9][]0-9&quot;*$ 或 ^-[1-9]\d*$<br><br>非负整数：^\d+$ 或 ^[1-9]\d*|0$<br><br>非正整数：^-[1-9]\d*|0$ 或 ^((-\d+)|(0+))$<br><br>非负浮点数：^\d+(\.\d+)?$ 或 ^[1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0$<br><br>非正浮点数：^((-\d+(\.\d+)?)|(0+(\.0+)?))$ 或 ^(-([1-9]\d*\.\d*|0\.\d*[1-9]\d*))|0?\.0+|0$<br><br>正浮点数：^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$ 或 ^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$<br><br>负浮点数：^-([1-9]\d*\.\d*|0\.\d*[1-9]\d*)$ 或 ^(-(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*)))$<br><br>浮点数：^(-?\d+)(\.\d+)?$ 或 ^-?([1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0)$<br></code></pre></td></tr></table></figure>
 
-<img src="/2021/02/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTPS/1.gif" srcset="/img/loading.gif" lazyload class="">
-</div>
+<h3 id="二、校验字符的表达式"><a href="#二、校验字符的表达式" class="headerlink" title="二、校验字符的表达式"></a>二、校验字符的表达式</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs TEXT">汉字：^[\u4e00-\u9fa5]&#123;0,&#125;$<br><br>英文和数字：^[A-Za-z0-9]+$ 或 ^[A-Za-z0-9]&#123;4,40&#125;$<br><br>长度为3-20的所有字符：^.&#123;3,20&#125;$<br><br>由26个英文字母组成的字符串：^[A-Za-z]+$<br><br>由26个大写英文字母组成的字符串：^[A-Z]+$<br><br>由26个小写英文字母组成的字符串：^[a-z]+$<br><br>由数字和26个英文字母组成的字符串：^[A-Za-z0-9]+$<br><br>由数字、26个英文字母或者下划线组成的字符串：^\w+$ 或 ^\w&#123;3,20&#125;$<br><br>中文、英文、数字包括下划线：^[\u4E00-\u9FA5A-Za-z0-9_]+$<br><br>中文、英文、数字但不包括下划线等符号：^[\u4E00-\u9FA5A-Za-z0-9]+$ 或 ^[\u4E00-\u9FA5A-Za-z0-9]&#123;2,20&#125;$<br><br>可以输入含有^%&amp;&#x27;,;=?$\&quot;等字符：[^%&amp;&#x27;,;=?$\x22]+<br><br>禁止输入含有~的字符：[^~\x22]+<br></code></pre></td></tr></table></figure>
 
-<ol>
-<li>客户端发送请求https连接。</li>
-<li>服务器返回加密公钥，通常是SSL证书。</li>
-<li>客户端从这个SSL证书解析出公钥，并随机生成一个key，通过公钥加密这个key发送给服务器（这一步是安全的因为只有服务器才有私钥能读出这个key）。</li>
-<li>服务器通过私钥解密出key。</li>
-<li>客户端使用这个key来加密需要传输的数据。</li>
-<li>服务器使用key来解析数据。</li>
-</ol>
-<p>简单的来说SSL加密的方式是使用一个密钥来加密另一个密钥（key），在使用被加密的密钥来加密数据。<br>这样的做法固然保证了安全性，但每次连接时都需要使用密钥加密，导致请求会需要额外的开销，同时服务器第一次返回的公钥的可靠性需要第三方来保证，通常是购买SSL证书。这也会造成额外的经济开销。</p>
-<h5 id="1、客户端发起-HTTPS-请求"><a href="#1、客户端发起-HTTPS-请求" class="headerlink" title="1、客户端发起 HTTPS 请求"></a>1、客户端发起 HTTPS 请求</h5><p>这个没什么好说的，就是用户在浏览器里输入一个 https 网址，然后连接到 server 的 443 端口。</p>
-<h5 id="2、服务端的配置"><a href="#2、服务端的配置" class="headerlink" title="2、服务端的配置"></a>2、服务端的配置</h5><p>采用 HTTPS 协议的服务器必须要有一套数字证书，可以自己制作，也可以向组织申请，区别就是自己颁发的证书需要客户端验证通过，才可以继续访问，而使用受信任的公司申请的证书则不会弹出提示页面(startssl 就是个不错的选择，有 1 年的免费服务)。</p>
-<p>这套证书其实就是一对公钥和私钥，如果对公钥和私钥不太理解，可以想象成一把钥匙和一个锁头，只是全世界只有你一个人有这把钥匙，你可以把锁头给别人，别人可以用这个锁把重要的东西锁起来，然后发给你，因为只有你一个人有这把钥匙，所以只有你才能看到被这把锁锁起来的东西。</p>
-<h5 id="3、传送证书"><a href="#3、传送证书" class="headerlink" title="3、传送证书"></a>3、传送证书</h5><p>这个证书其实就是公钥，只是包含了很多信息，如证书的颁发机构，过期时间等等。</p>
-<h5 id="4、客户端解析证书"><a href="#4、客户端解析证书" class="headerlink" title="4、客户端解析证书"></a>4、客户端解析证书</h5><p>这部分工作是有客户端的TLS来完成的，首先会验证公钥是否有效，比如颁发机构，过期时间等等，如果发现异常，则会弹出一个警告框，提示证书存在问题。</p>
-<p>如果证书没有问题，那么就生成一个随机值，然后用证书对该随机值进行加密，就好像上面说的，把随机值用锁头锁起来，这样除非有钥匙，不然看不到被锁住的内容。</p>
-<h5 id="5、传送加密信息"><a href="#5、传送加密信息" class="headerlink" title="5、传送加密信息"></a>5、传送加密信息</h5><p>这部分传送的是用证书加密后的随机值，目的就是让服务端得到这个随机值，以后客户端和服务端的通信就可以通过这个随机值来进行加密解密了。</p>
-<h5 id="6、服务端解密信息"><a href="#6、服务端解密信息" class="headerlink" title="6、服务端解密信息"></a>6、服务端解密信息</h5><p>服务端用私钥解密后，得到了客户端传过来的随机值(私钥)，然后把内容通过该值进行对称加密，所谓对称加密就是，将信息和私钥通过某种算法混合在一起，这样除非知道私钥，不然无法获取内容，而正好客户端和服务端都知道这个私钥，所以只要加密算法够彪悍，私钥够复杂，数据就够安全。</p>
-<h5 id="7、传输加密后的信息"><a href="#7、传输加密后的信息" class="headerlink" title="7、传输加密后的信息"></a>7、传输加密后的信息</h5><p>这部分信息是服务段用私钥加密后的信息，可以在客户端被还原。</p>
-<h5 id="8、客户端解密信息"><a href="#8、客户端解密信息" class="headerlink" title="8、客户端解密信息"></a>8、客户端解密信息</h5><p>客户端用之前生成的私钥解密服务段传过来的信息，于是获取了解密后的内容，整个过程第三方即使监听到了数据，也束手无策。</p>
-<h4 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h4><div align="center">
 
-<img src="/2021/02/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTPS/2.jpg" srcset="/img/loading.gif" lazyload class="">
-</div>
-
-<h5 id="1、第一次握手"><a href="#1、第一次握手" class="headerlink" title="1、第一次握手"></a>1、第一次握手</h5><p>客户端尝试连接服务器，向服务器发送 syn 包（同步序列编号Synchronize Sequence Numbers），syn&#x3D;j，客户端进入 SYN_SEND 状态等待服务器确认</p>
-<h5 id="2、第二次握手"><a href="#2、第二次握手" class="headerlink" title="2、第二次握手"></a>2、第二次握手</h5><p>服务器接收客户端syn包并确认（ack&#x3D;j+1），同时向客户端发送一个 SYN包（syn&#x3D;k），即 SYN+ACK 包，此时服务器进入 SYN_RECV 状态</p>
-<h5 id="3、第三次握手"><a href="#3、第三次握手" class="headerlink" title="3、第三次握手"></a>3、第三次握手</h5><p>第三次握手：客户端收到服务器的SYN+ACK包，向服务器发送确认包ACK(ack&#x3D;k+1），此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手</p>
-
+<h3 id="三、特殊需求表达式"><a href="#三、特殊需求表达式" class="headerlink" title="三、特殊需求表达式"></a>三、特殊需求表达式</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><code class="hljs TEXT">Email地址：^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$<br><br>域名：[a-zA-Z0-9][-a-zA-Z0-9]&#123;0,62&#125;(/.[a-zA-Z0-9][-a-zA-Z0-9]&#123;0,62&#125;)+/.?<br><br>InternetURL：[a-zA-z]+://[^\s]* 或 ^http://([\w-]+\.)+[\w-]+(/[\w-./?%&amp;=]*)?$<br><br>手机号码：^(13[0-9]|14[0-9]|15[0-9]|16[0-9]|17[0-9]|18[0-9]|19[0-9])\d&#123;8&#125;$ (由于工信部放号段不定时，所以建议使用泛解析 ^([1][3,4,5,6,7,8,9])\d&#123;9&#125;$)<br><br>电话号码(&quot;XXX-XXXXXXX&quot;、&quot;XXXX-XXXXXXXX&quot;、&quot;XXX-XXXXXXX&quot;、&quot;XXX-XXXXXXXX&quot;、&quot;XXXXXXX&quot;和&quot;XXXXXXXX)：^(\(\d&#123;3,4&#125;-)|\d&#123;3.4&#125;-)?\d&#123;7,8&#125;$ <br><br>国内电话号码(0511-4405222、021-87888822)：\d&#123;3&#125;-\d&#123;8&#125;|\d&#123;4&#125;-\d&#123;7&#125; <br><br>18位身份证号码(数字、字母x结尾)：^((\d&#123;18&#125;)|([0-9x]&#123;18&#125;)|([0-9X]&#123;18&#125;))$<br><br>帐号是否合法(字母开头，允许5-16字节，允许字母数字下划线)：^[a-zA-Z][a-zA-Z0-9_]&#123;4,15&#125;$<br><br>密码(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)：^[a-zA-Z]\w&#123;5,17&#125;$<br><br>强密码(必须包含大小写字母和数字的组合，不能使用特殊字符，长度在8-10之间)：^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).&#123;8,10&#125;$<br><br>日期格式：^\d&#123;4&#125;-\d&#123;1,2&#125;-\d&#123;1,2&#125;<br><br>一年的12个月(01～09和1～12)：^(0?[1-9]|1[0-2])$<br><br>一个月的31天(01～09和1～31)：^((0?[1-9])|((1|2)[0-9])|30|31)$ <br><br>钱的输入格式：<br>    1. 有四种钱的表示形式我们可以接受:&quot;10000.00&quot; 和 &quot;10,000.00&quot;, 和没有 &quot;分&quot; 的 &quot;10000&quot; 和 &quot;10,000&quot;：^[1-9][0-9]*$ <br><br>    2. 这表示任意一个不以0开头的数字,但是,这也意味着一个字符&quot;0&quot;不通过,所以我们采用下面的形式：^(0|[1-9][0-9]*)$<br><br>    3. 一个0或者一个不以0开头的数字.我们还可以允许开头有一个负号：^(0|-?[1-9][0-9]*)$ <br><br>    4. 这表示一个0或者一个可能为负的开头不为0的数字.让用户以0开头好了.把负号的也去掉,因为钱总不能是负的吧.下面我们要加的是说明可能的小数部分：^[0-9]+(.[0-9]+)?$<br><br>    5. 必须说明的是,小数点后面至少应该有1位数,所以&quot;10.&quot;是不通过的,但是 &quot;10&quot; 和 &quot;10.2&quot; 是通过的：^[0-9]+(.[0-9]&#123;2&#125;)?$<br><br>    6. 这样我们规定小数点后面必须有两位,如果你认为太苛刻了,可以这样：^[0-9]+(.[0-9]&#123;1,2&#125;)?$ <br><br>    7. 这样就允许用户只写一位小数.下面我们该考虑数字中的逗号了,我们可以这样：^[0-9]&#123;1,3&#125;(,[0-9]&#123;3&#125;)*(.[0-9]&#123;1,2&#125;)?$<br><br>    8. 1到3个数字,后面跟着任意个 逗号+3个数字,逗号成为可选,而不是必须：^([0-9]+|[0-9]&#123;1,3&#125;(,[0-9]&#123;3&#125;)*)(.[0-9]&#123;1,2&#125;)?$<br><br>        备注：这就是最终结果了,别忘了&quot;+&quot;可以用&quot;*&quot;替代如果你觉得空字符串也可以接受的话(奇怪,为什么?)最后,别忘了在用函数时去掉去掉那个反斜杠,一般的错误都在这里<br><br>xml文件：^([a-zA-Z]+-?)+[a-zA-Z0-9]+\\.[x|X][m|M][l|L]$<br><br>中文字符的正则表达式：[\u4e00-\u9fa5]<br><br>双字节字符：[^\x00-\xff]    (包括汉字在内，可以用来计算字符串的长度(一个双字节字符长度计2，ASCII字符计1))<br><br>空白行的正则表达式：\n\s*\r    (可以用来删除空白行)<br><br>HTML标记的正则表达式：&lt;(\S*?)[^&gt;]*&gt;.*?&lt;/\1&gt;|&lt;.*? /&gt;    (网上流传的版本太糟糕，上面这个也仅仅能部分，对于复杂的嵌套标记依旧无能为力)<br><br>首尾空白字符的正则表达式：^\s*|\s*$或(^\s*)|(\s*$)    (可以用来删除行首行尾的空白字符(包括空格、制表符、换页符等等)，非常有用的表达式)<br><br>腾讯QQ号：[1-9][0-9]&#123;4,&#125;    (腾讯QQ号从10000开始)<br><br>中国邮政编码：[1-9]\d&#123;5&#125;(?!\d)    (中国邮政编码为6位数字)<br><br>IP地址：\d+\.\d+\.\d+\.\d+    (提取IP地址时有用)<br><br>IP地址：((?:(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d)\\.)&#123;3&#125;(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d))    (由@飞龙三少 提供,感谢共享)<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -404,7 +353,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-chain-item">计算机网络</a>
+  <a href="/categories/%E5%B7%A5%E5%85%B7/" class="category-chain-item">工具</a>
   
   
 
@@ -419,9 +368,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">#计算机网络</a>
-      
-        <a href="/tags/HTTPS/">#HTTPS</a>
+        <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">#正则表达式</a>
       
     </div>
   
@@ -433,8 +380,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>HTTPS</div>
-      <div>https://huajframe.github.io/2021/02/02/计算机网络/HTTPS/</div>
+      <div>常用正则表达式</div>
+      <div>https://huajframe.github.io/2023/03/05/工具/常用正则表达式/</div>
     </div>
     <div class="license-meta">
       
@@ -446,7 +393,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2021年2月2日</div>
+          <div>2023年3月5日</div>
         </div>
       
       
@@ -484,18 +431,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/05/%E5%B7%A5%E5%85%B7/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E7%B1%BB/" title="常用工具类">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">常用工具类</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/01/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTP/" title="HTTP">
-                        <span class="hidden-mobile">HTTP</span>
+                      <a href="/2023/03/05/%E5%B7%A5%E5%85%B7/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E7%B1%BB/" title="常用工具类">
+                        <span class="hidden-mobile">常用工具类</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
