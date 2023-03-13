@@ -269,6 +269,228 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/04/10/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ/RabbitMQ%E6%B6%88%E6%81%AF%E5%B9%82%E7%AD%89%E6%80%A7%E9%97%AE%E9%A2%98/" target="_self">
+          <img src="/img/category/rbmq.jpg" srcset="/img/loading.gif" lazyload alt="RabbitMQ消息幂等性问题">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/10/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ/RabbitMQ%E6%B6%88%E6%81%AF%E5%B9%82%E7%AD%89%E6%80%A7%E9%97%AE%E9%A2%98/" target="_self">
+          RabbitMQ消息幂等性问题
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2021/04/10/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ/RabbitMQ%E6%B6%88%E6%81%AF%E5%B9%82%E7%AD%89%E6%80%A7%E9%97%AE%E9%A2%98/" target="_self">
+        <div>
+          什么是幂等性在编程中一个幂等操作的特点是其任意多次执行所产生的影响均与一次执行的影响相同 HTTP方法的幂等性是指一次和多次请求某一个资源应该具有同样的副作用。幂等性属于语义范畴，正如编译器只能帮助检查语法错误一样，HTTP规范也没有办法通过消息格式等语法手段来定义它。 简之：一个请求，不管重复来多少次，结果是不会改变的。 消费者在消费 MQ中的消息时，MQ 已把消息发送给消费者，消费者在给 MQ
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-10 09:24" pubdate>
+              2021-04-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="category-chain-item">消息中间件</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ/" class="category-chain-item">RabbitMQ</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/RabbitMQ/">#RabbitMQ</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/04/09/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ/RabbitMQ%E8%A1%A5%E5%81%BF%E6%9C%BA%E5%88%B6%E4%B8%8E-RabbitListener%E6%B3%A8%E8%A7%A3%E5%8E%9F%E7%90%86/" target="_self">
+          <img src="/img/category/rbmq.jpg" srcset="/img/loading.gif" lazyload alt="RabbitMQ补偿机制与@RabbitListener注解原理">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/09/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ/RabbitMQ%E8%A1%A5%E5%81%BF%E6%9C%BA%E5%88%B6%E4%B8%8E-RabbitListener%E6%B3%A8%E8%A7%A3%E5%8E%9F%E7%90%86/" target="_self">
+          RabbitMQ补偿机制与@RabbitListener注解原理
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2021/04/09/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ/RabbitMQ%E8%A1%A5%E5%81%BF%E6%9C%BA%E5%88%B6%E4%B8%8E-RabbitListener%E6%B3%A8%E8%A7%A3%E5%8E%9F%E7%90%86/" target="_self">
+        <div>
+          补偿机制RabbitMQ 默认情况下，如果消费者程序出现异常的情况下，会自动实现补偿（重试）机制 即队列服务器发送补偿请求 @RabbitListener原理@RabbitListener底层使用 AOP 进行拦截  如果程序没有抛出异常，则会自动提交事务 如果程序捕捉到异常信息，会自动实现补偿机制，该消息会缓存到 RabbitMQ服务端中，一直重试到不跑出异常为止  补偿机制一直重复显然是会占用
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-09 15:23" pubdate>
+              2021-04-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="category-chain-item">消息中间件</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ/" class="category-chain-item">RabbitMQ</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/RabbitMQ/">#RabbitMQ</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/04/05/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ/RabbitMQ%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" target="_self">
+          <img src="/img/category/rbmq.jpg" srcset="/img/loading.gif" lazyload alt="RabbitMQ实现分布式事务">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/05/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ/RabbitMQ%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" target="_self">
+          RabbitMQ实现分布式事务
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2021/04/05/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ/RabbitMQ%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" target="_self">
+        <div>
+          原理采用最终一致性原理 也就是说过程中可能会产生不一致，但是最终会保持一致 要素RabbitMQ解决分布式事务需要保证以下三要素  确认生产者一定要将数据发送到 MQ服务器中 采用 MQ 消息确认机制  MQ消费者消息能够正确消费消息  采用手动 ACK 模式，同时也要注意重试幂等性问题  保证第一个事务先执行  采用补偿机制，创建一个消费者进行监听第一个事务，如果第一个事务没有执行成功，进行补偿
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-05 19:16" pubdate>
+              2021-04-05
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="category-chain-item">消息中间件</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ/" class="category-chain-item">RabbitMQ</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/RabbitMQ/">#RabbitMQ</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2021/02/03/JVM/%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" target="_self">
           <img src="/img/category/jvm.jpeg" srcset="/img/loading.gif" lazyload alt="线程的生命周期">
         </a>
@@ -729,215 +951,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/JVM/">#JVM</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/01/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTPS/" target="_self">
-          <img src="/img/category/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.jpg" srcset="/img/loading.gif" lazyload alt="HTTPS">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTPS/" target="_self">
-          HTTPS
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt " href="/2021/01/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTPS/" target="_self">
-        <div>
-          HTTPS概念 HTTPS（Hypertext Transfer Protocol Secure：超文本传输安全协议）是一种透过计算机网络进行安全通信的传输协议。 HTTPS 经由 HTTP 进行通信，但利用 SSL&#x2F;TLS 来加密数据包。HTTPS 开发的主要目的，是提供对网站服务器的身份认证，保护交换数据的隐私与完整性。  与HTTP的对比默认端口 HTTPS 默认工作在 TCP 协
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-26 18:25" pubdate>
-              2021-01-26
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-chain-item">计算机网络</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">#计算机网络</a>
-            
-              <a href="/tags/HTTPS/">#HTTPS</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/01/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTP/" target="_self">
-          <img src="/img/category/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.jpg" srcset="/img/loading.gif" lazyload alt="HTTP">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTP/" target="_self">
-          HTTP
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt " href="/2021/01/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTP/" target="_self">
-        <div>
-          HTTP报文格式HTTP请求报文格式       请求行支持的方法       HTTP响应报文格式       常见状态码 100：这个状态码是告诉客户端应该继续发送请求，这个临时响应是用来通知客户端的，部分的请求服务器已经接受，但是客户端应继续发送求请求的剩余部分，如果请求已经完成，就忽略这个响应，而且服务器会在请求完成后向客户发送一个最终的结果 200：这个是最常见的http状态码，表示服务
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-26 14:30" pubdate>
-              2021-01-26
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-chain-item">计算机网络</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">#计算机网络</a>
-            
-              <a href="/tags/HTTP/">#HTTP</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/01/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/TCP%E5%92%8CUDP/" target="_self">
-          <img src="/img/category/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.jpg" srcset="/img/loading.gif" lazyload alt="TCP和UDP">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/TCP%E5%92%8CUDP/" target="_self">
-          TCP和UDP
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt " href="/2021/01/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/TCP%E5%92%8CUDP/" target="_self">
-        <div>
-          TCP一、TCP流量控制1.1 什么是流量控制有什么用？​如果数据发送的过快，则就接收方可能来不及接收，造成数据的丢失 ​ 所谓流量控制就是让发送方的发送速率不要太快，让接收方来得及接收。 1.2 滑动窗口实例     1.3 0窗口探测报文（携带1字节）当接收方告知发送方法接收窗口为0的时候开始启动持续计时器，等待接收方缓存有了新的存储空间 ​这个过程没过一个持续计时器都会发送零窗口探测报文 T
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-17 11:13" pubdate>
-              2021-01-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-chain-item">计算机网络</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">#计算机网络</a>
-            
-              <a href="/tags/TCP/">#TCP</a>
-            
-              <a href="/tags/UDP/">#UDP</a>
             
           </div>
         
